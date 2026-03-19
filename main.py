@@ -32,8 +32,10 @@ def get_youtube_data(youtube_url, output_filename="temp_audio"):
         'outtmpl': f'{output_filename}.%(ext)s', 
         'quiet': True, 
         'extract_flat': False,
-        # ✨ 추가된 마법의 옵션: 안드로이드 클라이언트로 위장하여 JS 인증 우회
-        'extractor_args': {'youtube': {'client': ['android', 'ios']}}
+        'noplaylist': True,
+        # ✨ 추가/수정된 우회 옵션들
+        'source_address': '0.0.0.0', # 클라우드 서버의 IPv6 주소 차단 회피 (IPv4 강제 사용)
+        'extractor_args': {'youtube': {'client': ['ios', 'tv', 'web']}} # 방어가 심한 안드로이드 대신 iOS와 스마트TV로 위장
     }
     
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
